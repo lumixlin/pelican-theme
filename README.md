@@ -1,0 +1,3 @@
+# lumix 
+a pelican theme
+

@@ -1,0 +1,28 @@
+{% extends "base.html"%}
+{% block content %}
+	{% for article in articles_page.object_list %}
+	<div class="row articleListItem {{ 'first' if loop.first and not articles_page.has_previous() }}">
+		<div class="span3 articleInfo light"> 
+			{% include 'article_info.html' %}
+		</div>
+		<div class="span6">
+			<h1>
+				<a href="{{ SITEURL }}/{{ article.url }}" title="{{ article.title }}" rel="bookmark">
+					{{ article.title  }}
+					<i class="icon-chevron-right"></i>
+				</a>
+			</h1>
+			<h3>{{ article.subtitle }}</h3>
+			<p class="text-justify"></p>
+			{{ article.summary }}
+		</div>
+	</div>
+	{% if loop.last and (articles_page.has_previous() or not articles_page.has_previous() and loop.length > 1) %}
+		<div class="span3"></div>
+		<div class="span6">
+		{% include 'pagination.html' %}
+		</div>
+	{% endif %}
+
+	{% endfor %}
+{% endblock %}
